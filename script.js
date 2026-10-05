@@ -17,7 +17,7 @@ fetch("events.json")
     const list = document.querySelector("#starred");
     if (list) {
       const errorItem = document.createElement("li");
-      errorItem.textContent = "Sorry, failed to load events.";
+      errorItem.textContent = "Failed to load events.";
       list.appendChild(errorItem);
     }
   });
