@@ -1,5 +1,10 @@
 fetch("events.json")
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
   .then((events) => {
     const list = document.querySelector("#starred");
     events.forEach((event) => {
@@ -7,4 +12,12 @@ fetch("events.json")
       item.textContent = `${event.name} — starred ${event.starred}`;
       list.appendChild(item);
     });
+  })
+  .catch((error) => {
+    const list = document.querySelector("#starred");
+    if (list) {
+      const errorItem = document.createElement("li");
+      errorItem.textContent = "Sorry, failed to load events.";
+      list.appendChild(errorItem);
+    }
   });
